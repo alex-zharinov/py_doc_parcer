@@ -7,18 +7,16 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from configs import configure_argument_parser, configure_logging
-from constants import (BASE_DIR, EXPECTED_STATUS, MAIN_DOC_URL,
-                       PEP_URL)
+from constants import BASE_DIR, EXPECTED_STATUS, MAIN_DOC_URL, PEP_URL
 from outputs import control_output
-from utils import find_tag, get_response
+from utils import find_tag, get_response, make_soup
 
 
 def whats_new(session):
     whats_new_url = urljoin(MAIN_DOC_URL, 'whatsnew/')
-    response = get_response(session, whats_new_url)
-    if response is None:
+    soup = make_soup(whats_new_url, session)
+    if soup is None:
         return
-    soup = BeautifulSoup(response.text, features='lxml')
 
     main_div = find_tag(soup, 'section', attrs={'id': 'what-s-new-in-python'})
 
@@ -46,10 +44,9 @@ def whats_new(session):
 
 
 def latest_versions(session):
-    response = get_response(session, MAIN_DOC_URL)
-    if response is None:
+    soup = make_soup(MAIN_DOC_URL, session)
+    if soup is None:
         return
-    soup = BeautifulSoup(response.text, features='lxml')
 
     sidebar = find_tag(soup, 'div', attrs={'class': 'sphinxsidebarwrapper'})
     ul_tags = sidebar.find_all('ul')
@@ -59,7 +56,7 @@ def latest_versions(session):
             a_tags = ul.find_all('a')
             break
     else:
-        raise Exception('Ничего не нашлось')
+        raise KeyError('Ничего не нашлось')
 
     results = [('Ссылка на документацию', 'Версия', 'Статус')]
     pattern = r'Python (?P<version>\d\.\d+) \((?P<status>.*)\)'
@@ -78,10 +75,10 @@ def latest_versions(session):
 
 def download(session):
     downloads_url = urljoin(MAIN_DOC_URL, 'download.html')
-    response = get_response(session, downloads_url)
-    if response is None:
+    soup = make_soup(downloads_url, session)
+    if soup is None:
         return
-    soup = BeautifulSoup(response.text, features='lxml')
+
     main_tag = find_tag(soup, 'div', {'role': 'main'})
     table_tag = main_tag.find('table', {'class': 'docutils'})
     pdf_a4_tag = table_tag.find('a', {'href': re.compile(r'.+pdf-a4\.zip$')})
@@ -99,11 +96,9 @@ def download(session):
 
 
 def pep(session):
-    response = get_response(session, PEP_URL)
-    if response is None:
+    soup = make_soup(PEP_URL, session)
+    if soup is None:
         return None
-
-    soup = BeautifulSoup(response.text, 'lxml')
 
     section_tag = find_tag(soup, 'section', attrs={'id': 'numerical-index'})
     tbody_tag = find_tag(section_tag, 'tbody')
@@ -167,15 +162,19 @@ def main():
     args = arg_parser.parse_args()
     logging.info(f'Аргументы командной строки: {args}')
 
-    session = requests_cache.CachedSession()
-    if args.clear_cache:
-        session.cache.clear()
+    try:
+        session = requests_cache.CachedSession()
+        if args.clear_cache:
+            session.cache.clear()
 
-    parser_mode = args.mode
-    results = MODE_TO_FUNCTION[parser_mode](session)
+        parser_mode = args.mode
+        results = MODE_TO_FUNCTION[parser_mode](session)
 
-    if results is not None:
-        control_output(results, args)
+        if results is not None:
+            control_output(results, args)
+
+    except Exception:
+        logging.exception('Ошибка при выполнении.', stack_info=True)
     logging.info('Парсер завершил работу.')
 
 

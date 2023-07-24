@@ -1,8 +1,16 @@
 import logging
 
+from bs4 import BeautifulSoup
 from requests import RequestException
 
 from exceptions import ParserFindTagException
+
+
+def make_soup(url, session):
+    response = get_response(session, url)
+    if response is None:
+        return None
+    return BeautifulSoup(response.text, features='lxml')
 
 
 def get_response(session, url):
