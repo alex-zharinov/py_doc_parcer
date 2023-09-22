@@ -1,4 +1,4 @@
-# Проект парсинга pep
+# Парсер PEP на BS4
 
 [![py-doc-parcer workflow](https://github.com/alex-zharinov/py_doc_parcer/actions/workflows/main.yml/badge.svg)](https://github.com/alex-zharinov/py_doc_parcer/actions/workflows/main.yml)
 
