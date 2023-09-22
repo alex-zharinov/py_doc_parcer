@@ -16,7 +16,7 @@ def whats_new(session):
     whats_new_url = urljoin(MAIN_DOC_URL, 'whatsnew/')
     soup = make_soup(whats_new_url, session)
     if soup is None:
-        return
+        return None
 
     main_div = find_tag(soup, 'section', attrs={'id': 'what-s-new-in-python'})
 
@@ -46,7 +46,7 @@ def whats_new(session):
 def latest_versions(session):
     soup = make_soup(MAIN_DOC_URL, session)
     if soup is None:
-        return
+        return None
 
     sidebar = find_tag(soup, 'div', attrs={'class': 'sphinxsidebarwrapper'})
     ul_tags = sidebar.find_all('ul')

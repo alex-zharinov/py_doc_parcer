@@ -4,7 +4,7 @@ import logging
 
 from prettytable import PrettyTable
 
-from constants import DATETIME_FORMAT, DOWNLOAD_TEXT, BASE_DIR
+from constants import BASE_DIR, DATETIME_FORMAT, DOWNLOAD_TEXT
 
 
 def control_output(results, cli_args):
