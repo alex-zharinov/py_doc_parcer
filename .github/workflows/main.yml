@@ -1,4 +1,4 @@
-name: py-doc-parcer workflow
+name: py-doc-parser workflow
 
 on: [push]
 
