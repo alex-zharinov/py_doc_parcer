@@ -1,6 +1,6 @@
 # Парсер PEP на BS4
 
-[![py-doc-parcer workflow](https://github.com/alex-zharinov/py_doc_parcer/actions/workflows/main.yml/badge.svg)](https://github.com/alex-zharinov/py_doc_parcer/actions/workflows/main.yml)
+[![py-doc-parcer workflow](https://github.com/alex-zharinov/py_doc_parser/actions/workflows/main.yml/badge.svg)](https://github.com/alex-zharinov/py_doc_parser/actions/workflows/main.yml)
 
 ## Парсинг документов PEP
 > Парсер собирает данные обо всех PEP документах, сравнивает статусы и записывает их в файл,
@@ -9,6 +9,8 @@
 ## Технологии проекта
 - Python — высокоуровневый язык программирования;
 - BeautifulSoup4 — библиотека для парсинга;
+- tqdm — это библиотека Python, которая позволяет выводить интеллектуальный индикатор выполнения, оборачивая любую итерацию;
+- argparse — парсер параметров командной строки;
 - Prettytable — библиотека для удобного отображения табличных данных.
 
 ### Как запустить проект:
