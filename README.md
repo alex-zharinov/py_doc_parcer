@@ -1,6 +1,6 @@
 # Парсер PEP на BS4
 
-[![py-doc-parcer workflow](https://github.com/alex-zharinov/py_doc_parser/actions/workflows/main.yml/badge.svg)](https://github.com/alex-zharinov/py_doc_parser/actions/workflows/main.yml)
+[![py-doc-parser workflow](https://github.com/alex-zharinov/py_doc_parser/actions/workflows/main.yml/badge.svg)](https://github.com/alex-zharinov/py_doc_parser/actions/workflows/main.yml)
 
 ## Парсинг документов PEP
 > Парсер собирает данные обо всех PEP документах, сравнивает статусы и записывает их в файл,
