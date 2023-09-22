@@ -1,50 +1,45 @@
 # Проект парсинга pep
 
-## Парсинг документов PEP
+[![py-doc-parcer workflow](https://github.com/alex-zharinov/py_doc_parcer/actions/workflows/main.yml/badge.svg)](https://github.com/alex-zharinov/py_doc_parcer/actions/workflows/main.yml)
 
+## Парсинг документов PEP
 > Парсер собирает данные обо всех PEP документах, сравнивает статусы и записывает их в файл,
 также реализованы сбор информации о статусе версий, скачивание архива с документацией и сбор ссылок о новостях в Python.
 
 ## Технологии проекта
-
-- Python — высокоуровневый язык программирования.
-- BeautifulSoup4 - библиотека для парсинга.
-- Prettytable - библиотека для удобного отображения табличных данных.
+- Python — высокоуровневый язык программирования;
+- BeautifulSoup4 — библиотека для парсинга;
+- Prettytable — библиотека для удобного отображения табличных данных.
 
 ### Как запустить проект:
-
 Клонировать репозиторий и перейти в него в командной строке:
-
 ```
-git clone https://github.com/alex-zharinov/bs4_parser_pep
+git clone https://github.com/alex-zharinov/py_doc_parcer.git
 ```
-
 ```
-cd bs4_parser_pep
+cd py_doc_parcer
 ```
-
 Cоздать и активировать виртуальное окружение:
-
 ```
 python3 -m venv venv
 ```
-
-```
-source venv/bin/activate
-```
-
+* Если у вас Linux/macOS
+    ```
+    source venv/bin/activate
+    ```
+* Если у вас windows
+    ```
+    source venv/scripts/activate
+    ```
 Установить зависимости из файла requirements.txt:
-
 ```
 python3 -m pip install --upgrade pip
 ```
-
 ```
 pip install -r requirements.txt
 ```
 
-## Работа с парсером
-
+## Работа с парсером:
 ### Режимы работы
 Сброр ссылок на статьи о нововведениях в Python:
 ```bash
@@ -85,4 +80,4 @@ optional arguments:
 ```
 
 ## Автор
-Жаринов Алексей
+[Жаринов Алексей](https://github.com/alex-zharinov)
